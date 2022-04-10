@@ -1,6 +1,6 @@
 import { SubstrateEvent } from "@subql/types"
 import { bool, Int } from "@polkadot/types"
-import { Proposal, VoteHistory, Councillor } from "../types"
+import { Proposal, VoteHistory, Councillor } from "../types/models"
 
 export async function handleCouncilProposedEvent(event: SubstrateEvent): Promise<void> {
   const {
@@ -18,11 +18,13 @@ export async function handleCouncilProposedEvent(event: SubstrateEvent): Promise
 }
 
 export async function handleCouncilVotedEvent(event: SubstrateEvent): Promise<void> {
+  // logger.info(JSON.stringify(event.event.data));
   const {
     event: {
       data: [councilorId, proposal_hash, approved_vote, numberYes, numberNo],
     },
   } = event
+
   await ensureCouncillor(councilorId.toString())
   // Retrieve the record by the accountID
   const voteHistory = new VoteHistory(`${event.block.block.header.number.toNumber()}-${event.idx}`)
