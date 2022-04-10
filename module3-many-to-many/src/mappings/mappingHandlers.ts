@@ -34,7 +34,7 @@ export async function handleCouncilVotedEvent(event: SubstrateEvent): Promise<vo
   voteHistory.votedYes = (numberYes as Int).toNumber()
   voteHistory.votedNo = (numberNo as Int).toNumber()
   voteHistory.block = event.block.block.header.number.toNumber()
-  logger.info(JSON.stringify(voteHistory))
+  // logger.info(JSON.stringify(voteHistory));
   await voteHistory.save()
 }
 
