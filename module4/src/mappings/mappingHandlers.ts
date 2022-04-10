@@ -2,6 +2,14 @@ import { SubstrateEvent } from "@subql/types"
 import { SumReward, StakingReward } from "../types"
 import { Balance } from "@polkadot/types/interfaces"
 
+export async function handleSumReward(event: SubstrateEvent): Promise<void> {
+  await handleSumRewarded(event)
+}
+
+export async function handleStakingReward(event: SubstrateEvent): Promise<void> {
+  await handleStakingRewarded(event)
+}
+
 export async function handleStakingRewarded(event: SubstrateEvent): Promise<void> {
   const {
     event: {
